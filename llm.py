@@ -3,14 +3,9 @@ import openai
 import chardet
 import PyPDF2
 import docx
-from dotenv import load_dotenv
-import os
 
-# Load environment variables from .env file
-load_dotenv()
-
-# Load the OpenAI API key from the environment variable
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Load the OpenAI API key from Streamlit secrets
+openai.api_key = st.secrets["openai"]["api_key"]
 
 def read_pdf(file):
     pdf_reader = PyPDF2.PdfReader(file)
