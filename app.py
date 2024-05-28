@@ -3,7 +3,6 @@ import openai
 import chardet
 import PyPDF2
 import docx
-import os
 
 # Load the OpenAI API key from Streamlit secrets
 openai.api_key = st.secrets["openai"]["api_key"]
@@ -33,7 +32,7 @@ def summarize_content(content):
             ],
             max_tokens=1000
         )
-        summarized_content = response['choices'][0]['message']['content'].strip()
+        summarized_content = response.choices[0].message['content'].strip()
         return summarized_content
     else:
         return content
@@ -49,7 +48,7 @@ def ask_question_to_llm(content, question):
         ],
         max_tokens=150
     )
-    return response['choices'][0]['message']['content'].strip()
+    return response.choices[0].message['content'].strip()
 
 def main():
     st.title('LLM Interaction')
