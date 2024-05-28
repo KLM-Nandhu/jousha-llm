@@ -1,0 +1,7 @@
+streamlit
+openai
+chardet
+PyPDF2
+docx
+dotenv
+os
