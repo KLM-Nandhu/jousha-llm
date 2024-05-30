@@ -7,10 +7,9 @@ import pypandoc
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-import os
 
-# Set your OpenAI API key
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Set your OpenAI API key from Streamlit secrets
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Initialize the session state to store total tokens used
 if 'total_tokens_used' not in st.session_state:
