@@ -7,3 +7,4 @@ pypandoc
 pandas
 numpy
 scikit-learn
+openpyxl
