@@ -5,6 +5,3 @@ PyPDF2
 python-docx
 pypandoc
 pandas
-numpy
-scikit-learn
-openpyxl
