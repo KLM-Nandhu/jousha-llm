@@ -1,5 +1,5 @@
 streamlit
-openai==1.30.5
+openai==0.28
 chardet
 PyPDF2
 python-docx
