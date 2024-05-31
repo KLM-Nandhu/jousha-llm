@@ -70,8 +70,8 @@ def split_text(text, max_tokens=2000):
     return chunks
 
 def ask_question_to_llm(prompt, max_tokens=150):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
+    response = client.completion.create(
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
@@ -169,7 +169,7 @@ def main():
                 st.session_state.total_tokens_used += total_token_usage
                 
                 st.write("### LLM's Response")
-                st.write("Here's the response from the LLM:", combined_response, height=300)
+                st.text_area("Here's the response from the LLM:", combined_response, height=300)
                 st.write(f"Tokens used in this request: {total_token_usage}")
                 st.write(f"Total tokens used: {st.session_state.total_tokens_used}")
             else:
