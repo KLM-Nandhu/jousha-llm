@@ -169,7 +169,7 @@ def main():
                 st.session_state.total_tokens_used += total_token_usage
                 
                 st.write("### LLM's Response")
-                st.text_area("Here's the response from the LLM:", combined_response, height=300)
+                st.write("Here's the response from the LLM:", combined_response, height=300)
                 st.write(f"Tokens used in this request: {total_token_usage}")
                 st.write(f"Total tokens used: {st.session_state.total_tokens_used}")
             else:
