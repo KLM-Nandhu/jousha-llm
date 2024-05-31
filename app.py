@@ -46,21 +46,28 @@ def read_rtf(file):
 def read_metadata(file):
     try:
         if file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            st.write("Reading metadata from Excel file.")
             return pd.read_excel(file)
         elif file.type == "text/plain":
-            return file.getvalue().decode()
+            st.write("Reading metadata from text file.")
+            return pd.read_csv(file)  # Assuming CSV format for plain text files
         elif file.type == "application/pdf":
+            st.write("Reading metadata from PDF file.")
             return read_pdf(file)
         elif file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+            st.write("Reading metadata from Word file.")
             return read_docx(file)
         elif file.type == "application/msword":
+            st.write("Reading metadata from Word (doc) file.")
             return read_docx(file)
         elif file.type == "application/rtf":
+            st.write("Reading metadata from RTF file.")
             return read_rtf(file)
         else:
+            st.write(f"Unsupported file type: {file.type}")
             return None
     except Exception as e:
-        print(f"Error reading metadata file: {e}")
+        st.write(f"Error reading metadata file: {e}")
         return None
 
 def split_text(text, max_tokens=2000):
@@ -113,7 +120,7 @@ def main():
     st.write("Upload multiple documents, and then ask a question based on their content.")
 
     uploaded_files = st.file_uploader("Choose files", type=["txt", "pdf", "docx", "rtf", "doc"], accept_multiple_files=True)
-    metadata_file = st.file_uploader("Upload metadata file", type=["xlsx"])
+    metadata_file = st.file_uploader("Upload metadata file", type=["xlsx", "csv", "pdf", "docx", "doc", "rtf"])
 
     if uploaded_files and metadata_file:
         file_contents = {}
