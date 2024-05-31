@@ -21,7 +21,7 @@ def read_pdf(file):
             text += pdf_reader.pages[page].extract_text() or ""
         return text
     except Exception as e:
-        print(f"Error reading PDF file: {e}")
+        st.error(f"Error reading PDF file: {e}")
         return ""
 
 def read_docx(file):
@@ -32,7 +32,7 @@ def read_docx(file):
             text += paragraph.text + "\n"
         return text
     except Exception as e:
-        print(f"Error reading DOCX file: {e}")
+        st.error(f"Error reading DOCX file: {e}")
         return ""
 
 def read_rtf(file):
@@ -40,14 +40,14 @@ def read_rtf(file):
         output = pypandoc.convert_text(file.read().decode('utf-8'), 'plain', format='rtf')
         return output
     except Exception as e:
-        print(f"Error reading RTF file: {e}")
+        st.error(f"Error reading RTF file: {e}")
         return ""
 
 def read_metadata(file):
     try:
         return pd.read_excel(file)
     except Exception as e:
-        st.write(f"Error reading metadata file: {e}")
+        st.error(f"Error reading metadata file: {e}")
         return None
 
 def split_text(text, max_tokens=2000):
@@ -73,7 +73,7 @@ def ask_question_to_llm(prompt, max_tokens=150):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant. "},
+            {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt}
         ],
         max_tokens=max_tokens,
@@ -125,7 +125,7 @@ def main():
                 elif uploaded_file.type == "application/rtf":
                     file_content = read_rtf(uploaded_file)
             except Exception as e:
-                print(f"Error reading file {uploaded_file.name}: {e}")
+                st.error(f"Error reading file {uploaded_file.name}: {e}")
                 continue
             
             file_contents[uploaded_file.name] = file_content
