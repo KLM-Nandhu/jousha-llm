@@ -70,7 +70,7 @@ def split_text(text, max_tokens=2000):
     return chunks
 
 def ask_question_to_llm(prompt, max_tokens=150):
-    response = client.completion.create(
+    response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
